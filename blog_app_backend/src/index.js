@@ -19,7 +19,7 @@ app.use(express.json())
     .use(morgan("dev"))
 
 //CORS Configuration
-const whitelist = ['http://example1.com', 'http://127.0.0.1:3000']
+const whitelist = ['http://example1.com', 'http://localhost:3000']
 const corsOptions = {
     credentials: true,
     origin: ((origin, callback) => {
@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 app.use('/api/v1', apiRoutes)
 
 // // catch 404 Error
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     return notFoundError(res, { errors: [ { message: "Not Found Error" } ] })
 });
 
