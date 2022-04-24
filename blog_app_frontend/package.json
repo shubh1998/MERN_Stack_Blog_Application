@@ -1,0 +1,94 @@
+{
+  "name": "blog_app_frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "1.7.1",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "13.1.1",
+    "@testing-library/user-event": "13.5.0",
+    "axios": "0.24.0",
+    "html-to-text": "7.0.0",
+    "jwt-decode": "3.1.2",
+    "moment": "2.29.1",
+    "node-sass": "^7.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-helmet": "6.1.0",
+    "react-hot-toast": "1.0.1",
+    "react-icons": "4.1.0",
+    "react-redux": "7.2.6",
+    "react-router-dom": "6.2.1",
+    "react-scripts": "5.0.0",
+    "universal-cookie": "4.0.4",
+    "uuid": "8.3.2",
+    "web-vitals": "2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "prestart": "node bin/restrictNodeVersion.js",
+    "preinstall": "node bin/restrictNodeVersion.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "sync-icons": "node bin/sync_icons.js"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "standard": {
+    "parser": "@babel/eslint-parser",
+    "env": {
+      "jest": true,
+      "browser": true
+    },
+    "globals": [
+      "artifacts",
+      "tronWeb",
+      "contract",
+      "before",
+      "assert",
+      "after"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "7.17.6",
+    "@babel/core": "7.17.5",
+    "@babel/eslint-parser": "7.17.0",
+    "@babel/preset-react": "7.16.7",
+    "glob": "7.1.6",
+    "humps": "2.0.1",
+    "husky": "7.0.4",
+    "lint-staged": "12.1.2",
+    "standard": "16.0.4",
+    "webpack": "5.69.1"
+  }
+}
