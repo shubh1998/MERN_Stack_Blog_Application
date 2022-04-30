@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
+import { ROUTE_PATHS } from 'utils/constants/index';
 const Navbar = () => {
   const user = null
 
   const Links = user ? (
 		<div className='navbar__right'>
 			<li>
-				<Link to='/create'>Create Post</Link>
+				<Link to={ROUTE_PATHS.createPost}>Create Post</Link>
 			</li>
 			<li>
-				<Link to='/dashboard/1'>{user.name}</Link>
+				<Link to={ROUTE_PATHS.dashboard}>{user.name}</Link>
 			</li>
 			<li>
 				<span>Logout</span>
@@ -17,13 +18,13 @@ const Navbar = () => {
 	) : (
 		<div className='navbar__right'>
       <li>
-				<Link to='/'>Home</Link>
+				<Link to={ROUTE_PATHS.home}>Home</Link>
       </li>
 			<li>
-				<Link to='/login'>Login</Link>
+				<Link to={ROUTE_PATHS.login}>Login</Link>
 			</li>
 			<li>
-				<Link to='/register'>Register</Link>
+				<Link to={ROUTE_PATHS.register}>Register</Link>
 			</li>
 		</div>
 	);
@@ -32,7 +33,7 @@ const Navbar = () => {
 			<div className='container'>
 				<div className='navbar__row'>
 					<div className='navbar__left'>
-						<Link to='/'>
+						<Link to={ROUTE_PATHS.home}>
 							<img src='/images/logo.png' alt='' />
 						</Link>
 					</div>
