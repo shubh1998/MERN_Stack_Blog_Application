@@ -1,6 +1,7 @@
 import BgImage from '../BgImage/BgImage';
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import { openSuccessToaster } from 'utils/services/toaster.services';
 
 const loginSchema = yup.object({
   email: yup.string().email('Invalid email').required('Required'),
@@ -32,6 +33,7 @@ const Login = () => {
                 validationSchema={loginSchema}
                 onSubmit={(values, actions) => {
                   console.log(values)
+                  openSuccessToaster("LoggedIn Successfully !")
                 }}
               >
                 {
