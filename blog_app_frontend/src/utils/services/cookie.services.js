@@ -1,4 +1,7 @@
+import Cookies from 'universal-cookie'
 import { TOKEN } from "utils/constants/index"
+
+const cookies = new Cookies()
 
 // 24 hour * 60 minutes of every hour
 const COOKIE_EXPIRE_MIN = 24 * 60
