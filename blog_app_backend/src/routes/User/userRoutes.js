@@ -1,8 +1,9 @@
 const router = require("express").Router()
 const { userManagementController } = require("../../controllers/index")
-const { userRequestValidators } = require("../../utils/validators/index")
 const requestPayloadValidator = require("../../middlewares/requestPayloadValidator")
+const { registerUserRequestPayload, loginUserRequestPayload } = require("../../utils/validators/User/userRequestValidators")
 
-router.post('/user/register', userRequestValidators.validateRegisterUser(), requestPayloadValidator, userManagementController.registerUser)
+router.post('/user/register', registerUserRequestPayload(), requestPayloadValidator, userManagementController.registerUser)
+router.post('/user/login', loginUserRequestPayload(), requestPayloadValidator, userManagementController.loginUser)
 
 module.exports = router
