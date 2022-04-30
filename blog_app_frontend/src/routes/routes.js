@@ -1,4 +1,4 @@
-import NotFound from 'pages/NotFound/NotFound'
+import NotFound from 'components/NotFound/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import { routeList } from './routeList'
 import RouteValidator from './RouteValidator'
