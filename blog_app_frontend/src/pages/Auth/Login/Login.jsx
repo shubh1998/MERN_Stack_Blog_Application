@@ -1,7 +1,11 @@
-import BgImage from '../BgImage/BgImage';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import { openSuccessToaster } from 'utils/services/toaster.services';
+import BgImage from '../BgImage/BgImage';
+import { useNavigate } from 'react-router-dom';
+import { userLogin } from 'redux-thunk/thunk/Auth/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import AppLoader from 'components/AppLoader/index';
+import { LOADER_TYPE } from 'utils/constants/index';
 
 const loginSchema = yup.object({
   email: yup.string().email('Invalid email').required('Required'),
@@ -19,6 +23,15 @@ const formFields = {
 }
 
 const Login = () => {
+  const { submitButtonLoader } = useSelector((state) => state.loader)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const onLoginFormSubmit = (values) => {
+    const { email, password } = values
+    dispatch(userLogin({ email, password, navigate }))
+  }
+
   return (
     <>
       <div className='row mt-80'>
@@ -32,8 +45,7 @@ const Login = () => {
                 initialValues={formInitialValues}
                 validationSchema={loginSchema}
                 onSubmit={(values, actions) => {
-                  console.log(values)
-                  openSuccessToaster("LoggedIn Successfully !")
+                  onLoginFormSubmit(values)
                 }}
               >
                 {
@@ -73,7 +85,13 @@ const Login = () => {
                         }
                       </div>
                       <div className='group'>
-                        <button type='submit' className='btn btn-default btn-block'>Login</button>
+                        <button type='submit' className='btn btn-default btn-block'>
+                          {
+                            submitButtonLoader ?
+                            <AppLoader variant={LOADER_TYPE.PULSE} size={5} /> :
+                            'Login'
+                          }
+                        </button>
                       </div>
                     </form>
                   )

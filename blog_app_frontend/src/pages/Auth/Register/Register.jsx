@@ -1,6 +1,8 @@
 import BgImage from '../BgImage/BgImage';
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import { useDispatch } from 'react-redux';
+import { userRegister } from 'redux-thunk/thunk/Auth/Auth';
 
 const registerSchema = yup.object({
   name: yup.string().min(2, 'Name must be at least 2 characters').max(20, 'Name can not exceed 20 characters').required('Required'),
@@ -20,7 +22,14 @@ const formFields = {
   password: 'password'
 }
 
-const Register = (props) => {
+const Register = () => {
+  const dispatch = useDispatch()
+
+  const onRegisterFormSubmit = (values) => {
+    const { name, email, password } = values
+    dispatch(userRegister({ name, email, password }))
+  }
+
   return (
     <>
       <div className='row mt-80'>
@@ -34,7 +43,7 @@ const Register = (props) => {
                 initialValues={formInitialValues}
                 validationSchema={registerSchema}
                 onSubmit={(values, actions) => {
-                  console.log(values)
+                  onRegisterFormSubmit(values)
                 }}
               >
                 {
