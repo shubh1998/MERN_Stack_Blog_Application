@@ -18,3 +18,22 @@ export const METHOD_TYPES = {
   delete: 'delete',
   patch: 'patch'
 }
+
+
+/* ==========================================================================
+  Types of Loader
+========================================================================== */
+export const LOADER_TYPE = {
+  SCALE: 'scale',
+  PULSE: 'pulse'
+}
+
+/* ==========================================================================
+  Loader Handler Types
+========================================================================== */
+export const LOADER_HANDLER_TYPES = {
+  page: 'pageLoader',
+  submit: 'submitButtonLoader',
+  table: 'tableLoader',
+  dialog: 'dialogLoader'
+}
