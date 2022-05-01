@@ -21,7 +21,6 @@ const registerUser = async (req, res) => {
 
         return okResponse(res, { data: returnData, message: "User registered successfully !" })
     } catch (error) {
-        console.log(error)
         return internalServerError(res, { errors: [{ message: "Internal Server Error" }] })
     }
 }
@@ -42,7 +41,6 @@ const loginUser = async (req, res) => {
 
         /****** Generate authenticated data and its auth_token *****/
         const authToken = await user.generateAuthToken();
-        console.log(authToken)
         res.setHeader("Content-Type", "application/json");
         res.setHeader("AuthToken", authToken);
         res.setHeader("Access-Control-Expose-Headers", "AuthToken");
