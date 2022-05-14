@@ -1,5 +1,6 @@
 import Login from "pages/Auth/Login/Login";
 import Register from "pages/Auth/Register/Register";
+import Dashboard from "pages/Dashboard/Dashboard";
 import Home from "pages/Home/Home";
 import { ROUTE_PATHS } from "utils/constants/index";
 
@@ -26,6 +27,14 @@ export const routeList = [
     path: ROUTE_PATHS.register,
     component: Register,
     hasAuth: false,
+    hasNavBar: true
+  },
+  {
+    key: 4,
+    label: 'Dashboard',
+    path: ROUTE_PATHS.dashboard,
+    component: Dashboard,
+    hasAuth: true,
     hasNavBar: true
   }
 ]

@@ -1,16 +1,13 @@
-import Navbar from 'components/NavBar/Navbar'
 import PropTypes from 'prop-types'
+import { getAuthToken } from 'utils/services/cookie.services'
+import PrivateRoutes from './HOC/PrivateRoutes/index'
+import PublicRoutes from './HOC/PublicRoutes/index'
 
 const RouteValidator = ({ hasAuth, hasNavBar, component: Component, ...props }) => {
-  return (
-      hasNavBar ?
-        <>
-          <Navbar />
-          <Component />
-        </>
-      :
-      <Component />
-  )
+  const isAuthenticated = getAuthToken()
+  return hasAuth
+    ? <PrivateRoutes Component={Component} isAuthenticated={isAuthenticated} hasNavBar={hasNavBar} />
+    : <PublicRoutes Component={Component} isAuthenticated={isAuthenticated} hasNavBar={hasNavBar} />
 }
 
 RouteValidator.propTypes = {
