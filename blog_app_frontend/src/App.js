@@ -1,9 +1,9 @@
 import AppRoutes from "routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AppLoader from "components/AppLoader/index";
 import { LOADER_TYPE } from "utils/constants/index";
 import { useSelector } from "react-redux";
+import AppLoader from "components/AppLoader/AppLoader";
 
 function App() {
   const { pageLoader } = useSelector((state) => state.loader)
