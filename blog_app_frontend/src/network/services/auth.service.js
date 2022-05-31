@@ -1,7 +1,7 @@
 import axiosInstance, { microServices } from "network/apis/index"
 import { LOADER_HANDLER_TYPES, METHOD_TYPES } from "utils/constants/index"
 
- export const registerService = (data) => {
+export const registerService = (data) => {
   return axiosInstance(METHOD_TYPES.post, '/user/register', data, {
     server: microServices.API_URL_1,
     handlerEnabled: false,
@@ -11,7 +11,7 @@ import { LOADER_HANDLER_TYPES, METHOD_TYPES } from "utils/constants/index"
 }
 
 
- export const loginService = (data) => {
+export const loginService = (data) => {
   return axiosInstance(METHOD_TYPES.post, '/user/login', data, {
     server: microServices.API_URL_1,
     handlerEnabled: false,
