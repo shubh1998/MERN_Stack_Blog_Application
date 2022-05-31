@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from 'utils/constants/index';
-import { signOut } from 'utils/services/cookie.services';
+import { getAuthToken, signOut } from 'utils/services/cookie.services';
 import { openSuccessToaster } from 'utils/services/toaster.services'
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = () => {
+  const isAuthenticated = getAuthToken()
   const navigate = useNavigate()
 
   const handleLogout = () => {

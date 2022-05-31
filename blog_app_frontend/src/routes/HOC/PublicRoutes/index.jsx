@@ -10,7 +10,7 @@ const PublicRoutes = ({ Component, hasNavBar, isAuthenticated }) => {
     (
       hasNavBar ?
       <>
-        <Navbar isAuthenticated={isAuthenticated} />
+        <Navbar />
         <div className='row mt-80'>
           <Component />
         </div>

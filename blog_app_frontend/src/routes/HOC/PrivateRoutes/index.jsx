@@ -8,7 +8,7 @@ const PrivateRoutes = ({ Component, isAuthenticated, hasNavBar }) => {
     ? (
       hasNavBar ?
         <>
-          <Navbar isAuthenticated={isAuthenticated} />
+          <Navbar />
           <div className='row mt-80'>
             <Component />
           </div>
