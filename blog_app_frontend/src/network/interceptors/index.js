@@ -51,6 +51,8 @@ export const errorHandler = (error) => {
     openErrorToaster('Internal Server Error')
     return Promise.reject(error.response.data.errors)
   }
-  openErrorToaster(error.response.data.errors[0].message)
+  error.response.data.errors.map((error) => {
+    openErrorToaster(error.message)
+  })
   return Promise.reject(error.response.data.errors)
 }
