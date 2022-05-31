@@ -56,7 +56,7 @@ const loginUser = async (req, res) => {
 
         return okResponse(res, { data: returnData, message: "Login successfully !" });
     } catch (error) {
-
+        return internalServerError(res, { errors: [{ message: "Internal Server Error" }] })
     }
 }
 

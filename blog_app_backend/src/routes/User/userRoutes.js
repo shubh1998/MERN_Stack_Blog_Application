@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { userManagementController } = require("../../controllers/index")
+const { userManagementController } = require("../../controllers")
 const requestPayloadValidator = require("../../middlewares/requestPayloadValidator")
 const { registerUserRequestPayload, loginUserRequestPayload } = require("../../utils/validators/User/userRequestValidators")
 
