@@ -4,7 +4,7 @@ import BgImage from '../BgImage/BgImage';
 import { useNavigate } from 'react-router-dom';
 import { userLogin } from 'redux-thunk/thunk/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
-import AppLoader from 'components/AppLoader/index';
+import AppLoader from 'components/AppLoader/AppLoader';
 import { LOADER_TYPE } from 'utils/constants/index';
 
 const loginSchema = yup.object({
