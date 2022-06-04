@@ -16,10 +16,10 @@ const Navbar = () => {
   const Links = isAuthenticated ? (
     <div className='navbar__right'>
       <li>
-        <Link to={ROUTE_PATHS.createPost}>Create Post</Link>
+        <Link to={ROUTE_PATHS.dashboard}>Dashboard</Link>
       </li>
       <li>
-        <Link to={ROUTE_PATHS.dashboard}>Dashboard</Link>
+        <Link to={ROUTE_PATHS.createPost}>Create Post</Link>
       </li>
       <li>
         <span onClick={handleLogout}>Logout</span>

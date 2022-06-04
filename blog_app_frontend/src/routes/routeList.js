@@ -45,5 +45,13 @@ export const routeList = [
     component: CreatePost,
     hasAuth: true,
     hasNavBar: true
+  },
+  {
+    key: 5,
+    label: 'Update Post',
+    path: ROUTE_PATHS.updatePost,
+    component: CreatePost,
+    hasAuth: true,
+    hasNavBar: true
   }
 ]

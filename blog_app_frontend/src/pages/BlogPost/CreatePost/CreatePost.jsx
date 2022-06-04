@@ -1,11 +1,12 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AppLoader from 'components/AppLoader/AppLoader'
 import { useDispatch, useSelector } from 'react-redux';
 import { LOADER_TYPE } from 'utils/constants/index';
-import { useReducer, useState } from 'react';
-import { createBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost';
+import { useEffect, useReducer, useState } from 'react';
+import { createBlogPost, getBlogByIdOnDashboard, updateBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost';
+import { resetUpdatePostData } from 'redux-thunk/redux/BlogPost/blogPostSlice';
 
 const modules = {
   toolbar: [
@@ -41,6 +42,10 @@ const initialStates = {
 }
 
 const CreatePost = () => {
+  const { state } = useLocation()
+  const blogIdForUpdate = state?._id || null
+  console.log(blogIdForUpdate)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [body, setBody] = useState('')
@@ -49,8 +54,9 @@ const CreatePost = () => {
     ...newState
   }), initialStates)
   const { submitButtonLoader } = useSelector((state) => state.loader)
+  const { updatePostData } = useSelector((state) => state.blogPost)
 
-  const onCreatePostFormSubmit = (e) => {
+  const onFormSubmit = (e) => {
     e.preventDefault();
     const { title, description, slug, image } = postState
     const formData = new FormData();
@@ -59,10 +65,18 @@ const CreatePost = () => {
     formData.append('description', description);
     formData.append('slug', slug);
     formData.append('body', body);
-    dispatch(createBlogPost({
-      formData,
-      navigate
-    }))
+    if(blogIdForUpdate && updatePostData){
+      dispatch(updateBlogPost({
+        formData,
+        navigate,
+        blogId: blogIdForUpdate
+      }))
+    } else{
+      dispatch(createBlogPost({
+        formData,
+        navigate
+      }))
+    }
   }
 
   const fileHandle = (e) => {
@@ -98,10 +112,39 @@ const CreatePost = () => {
     }
   }
 
+  useEffect(() => {
+    if (blogIdForUpdate) {
+      dispatch(getBlogByIdOnDashboard({
+        blogId: blogIdForUpdate
+      }))
+    }
+    return ()=>{
+      dispatch(resetUpdatePostData())
+    }
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    if (updatePostData) {
+      console.log(updatePostData)
+      setPostState({
+        title: updatePostData.title,
+        description: updatePostData.description,
+        slug: updatePostData.slug,
+        image: new File([updatePostData.image],  '/blog-post-images/' + updatePostData.image),
+
+        // new File('/blog-post-images/' + updatePostData.image),
+        imagePreview: '/blog-post-images/' + updatePostData.image,
+        currentImage: 'updatePostData.image',
+       })
+       setBody(updatePostData.body)
+    }
+  }, [updatePostData])
+
   return (
     <div className='container'>
       <div className='create'>
-        <form onSubmit={onCreatePostFormSubmit}>
+        <form onSubmit={onFormSubmit}>
           <div className='row ml-minus-15 mr-minus-15'>
             <div className='col-12 p-15'>
               <div className='card'>
@@ -189,7 +232,7 @@ const CreatePost = () => {
                     {
                       submitButtonLoader ?
                         <AppLoader variant={LOADER_TYPE.PULSE} size={5} /> :
-                        'Create Post'
+                        (blogIdForUpdate && updatePostData) ? 'Update Post' : 'Create Post'
                     }
                   </button>
                 </div>

@@ -11,10 +11,23 @@ export const createBlogPostService = (data) => {
 }
 
 export const updateBlogPostService = (data) => {
-  return axiosInstance(METHOD_TYPES.patch, '/blog-post/update', data, {
+  const { blogId, formData } = data
+  return axiosInstance(METHOD_TYPES.patch, '/blog-post/update', formData, {
     server: microServices.API_URL_1,
-    params: {},
+    params: {
+      blog_id: blogId
+    },
     loader: LOADER_HANDLER_TYPES.submit,
+    showApiSuccessMessage: true
+  })
+}
+
+export const fetchBlogByIdService = (data) => {
+  const { blogId } = data
+  return axiosInstance(METHOD_TYPES.get, '/blog-post/details', {}, {
+    server: microServices.API_URL_1,
+    params: { blog_id: blogId },
+    loader: LOADER_HANDLER_TYPES.page,
     showApiSuccessMessage: true
   })
 }

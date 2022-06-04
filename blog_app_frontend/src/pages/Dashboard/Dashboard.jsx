@@ -1,13 +1,15 @@
 import moment from 'moment';
-import { Link } from 'react-router-dom'
-import { BsArchive } from 'react-icons/bs';
+import { Link, useNavigate } from 'react-router-dom'
+import { BsArchive, BsPencil } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { deleteBlogOnDashboard, fetchBlogsOnDashboard } from 'redux-thunk/thunk/Dashboard/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'components/Pagination/Pagination';
+import { ROUTE_PATHS } from 'utils/constants/index';
 
 const Dashboard = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { dashboardPostsData } = useSelector(state => state.dashboard)
   const [pagination, setPagination] = useState({
     page: 1,
@@ -32,6 +34,10 @@ const Dashboard = () => {
     dispatch(fetchBlogsOnDashboard(paginationUpdatedValue))
   }
 
+  const redirectToUpdatePost = (rowData) => {
+    navigate(ROUTE_PATHS.updatePost, { state: rowData })
+  }
+
   return (
     dashboardPostsData &&
     <div className='container'>
@@ -48,10 +54,8 @@ const Dashboard = () => {
                   <div className='dashboard__posts__links'>
                     {/* <Link to={`/updateImage/${post._id}`}>
                     <BsImage className='icon' />
-                  </Link>
-                  <Link to={`/edit/${post._id}`}>
-                    <BsPencil className='icon' />
                   </Link> */}
+                    <BsPencil className='icon' onClick={() => redirectToUpdatePost(post)}/>
                     <BsArchive
                       onClick={() => handleDeletePost(post._id)}
                       className='icon'

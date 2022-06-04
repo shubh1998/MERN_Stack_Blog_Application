@@ -11,7 +11,6 @@ export const fetchAllBlogsForDashboardService = (data) => {
   })
 }
 
-
 export const deleteBlogByIdService = (data) => {
   const { blogId } = data
   return axiosInstance(METHOD_TYPES.delete, '/blog-post/delete', {}, {
