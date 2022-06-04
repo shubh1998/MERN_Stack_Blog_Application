@@ -10,3 +10,14 @@ export const fetchAllBlogsForDashboardService = (data) => {
     showApiSuccessMessage: true
   })
 }
+
+
+export const deleteBlogByIdService = (data) => {
+  const { blogId } = data
+  return axiosInstance(METHOD_TYPES.delete, '/blog-post/delete', {}, {
+    server: microServices.API_URL_1,
+    params: { blog_id: blogId },
+    loader: LOADER_HANDLER_TYPES.page,
+    showApiSuccessMessage: true
+  })
+}

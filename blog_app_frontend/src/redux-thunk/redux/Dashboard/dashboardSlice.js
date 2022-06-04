@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchBlogsOnDashboard } from 'redux-thunk/thunk/Dashboard/Dashboard'
+import { deleteBlogOnDashboard, fetchBlogsOnDashboard } from 'redux-thunk/thunk/Dashboard/Dashboard'
 const defaultDashboardState = {
   dashboardPostsData: null
 }
@@ -14,6 +14,14 @@ const dashboardSlice = createSlice({
         return {
           ...state,
           dashboardPostsData: action.payload
+        }
+      })
+      .addCase(deleteBlogOnDashboard.fulfilled, (state, action) => {
+        return {
+          dashboardPostsData: {
+            result: state.dashboardPostsData.result.filter(blogs => blogs._id !== action.payload._id),
+            total_documents: state.dashboardPostsData.total_documents - 1
+          }
         }
       })
   }

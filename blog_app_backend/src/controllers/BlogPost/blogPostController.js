@@ -78,7 +78,7 @@ const fetchPostById = async (req, res) => {
 
 const deletePostById = async (req, res) => {
     try {
-        const id = req.params.id;
+        const id = req.query.blog_id;
         const deletedPostDetail = await BlogPost.findByIdAndRemove({ _id: id });
         return okResponse(res, { data: deletedPostDetail, message: "Post deleted successfully !" })
     } catch (error) {

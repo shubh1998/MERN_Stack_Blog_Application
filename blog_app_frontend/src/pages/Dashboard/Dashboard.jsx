@@ -2,7 +2,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom'
 import { BsArchive } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
-import { fetchBlogsOnDashboard } from 'redux-thunk/thunk/Dashboard/Dashboard';
+import { deleteBlogOnDashboard, fetchBlogsOnDashboard } from 'redux-thunk/thunk/Dashboard/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'components/Pagination/Pagination';
 
@@ -16,10 +16,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchBlogsOnDashboard(pagination))
-  }, [dispatch])
+    // eslint-disable-next-line
+  }, [])
 
-  const handleDeletePost = (id) => {
-    console.log(id)
+  const handleDeletePost = (blogId) => {
+    dispatch(deleteBlogOnDashboard({ blogId }))
   }
 
   const handlePagination = ({ page }) => {
@@ -62,13 +63,13 @@ const Dashboard = () => {
               <h1>No Posts Found</h1>
           }
           {
-            dashboardPostsData.total_documents &&
+            dashboardPostsData.total_documents ?
             <Pagination
               page={pagination.page}
               limit={pagination.limit}
               total={dashboardPostsData.total_documents}
               handlePagination={handlePagination}
-            />
+            /> : <></>
           }
         </div>
       </div>

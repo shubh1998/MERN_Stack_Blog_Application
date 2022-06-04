@@ -52,16 +52,17 @@ const CreatePost = () => {
 
   const onCreatePostFormSubmit = (e) => {
     e.preventDefault();
-    const {title, description, slug, image} = postState
-    console.log({postState, body})
+    const { title, description, slug, image } = postState
     const formData = new FormData();
-		formData.append('title', title);
-		formData.append('image', image);
-		formData.append('description', description);
-		formData.append('slug', slug);
-		formData.append('body', body);
-    // const payload = {...formData, navigate}
-    dispatch(createBlogPost(formData))
+    formData.append('title', title);
+    formData.append('image', image);
+    formData.append('description', description);
+    formData.append('slug', slug);
+    formData.append('body', body);
+    dispatch(createBlogPost({
+      formData,
+      navigate
+    }))
   }
 
   const fileHandle = (e) => {
@@ -84,15 +85,15 @@ const CreatePost = () => {
 
   const handleURL = (e) => {
     e.preventDefault();
-    setPostState({slug: postState.slug.trim().split(' ').join('-'), slugButton: false});
+    setPostState({ slug: postState.slug.trim().split(' ').join('-'), slugButton: false });
   };
 
   const handleChange = (e) => {
     setPostState({ [e.target.name]: e.target.value })
-    if(e.target.name === "title"){
+    if (e.target.name === "title") {
       const createSlug = e.target.value.trim().split(' ').join('-');
-		  setPostState({ slug: createSlug });
-    } else if(e.target.name === "slug"){
+      setPostState({ slug: createSlug });
+    } else if (e.target.name === "slug") {
       setPostState({ slugButton: true });
     }
   }
@@ -102,10 +103,9 @@ const CreatePost = () => {
       <div className='create'>
         <form onSubmit={onCreatePostFormSubmit}>
           <div className='row ml-minus-15 mr-minus-15'>
-            <div className='col-6 p-15'>
+            <div className='col-12 p-15'>
               <div className='card'>
                 <h3 className='card__h3'>Create a new post</h3>
-
                 <div className='group'>
                   <label htmlFor='title'>Post Title</label>
                   <input
@@ -119,27 +119,25 @@ const CreatePost = () => {
                   />
                 </div>
                 <div className='group'>
-                  <label htmlFor='image' className='image__label'>
-                    {postState.currentImage}
-                  </label>
+                  <label htmlFor='slug'>Post Slug URL</label>
                   <input
-                    type='file'
-                    name='image'
-                    id='image'
-                    onChange={fileHandle}
+                    className='group__control'
+                    placeholder='Post URL...'
+                    autoComplete='off'
+                    type='text'
+                    name="slug"
+                    onChange={handleChange}
+                    value={postState.slug}
                   />
                 </div>
                 <div className='group'>
-                  <label htmlFor='body'>Post body</label>
-                  <ReactQuill
-                    theme='snow'
-                    placeholder='Post body...'
-                    modules={modules}
-                    formats={formats}
-                    name="body"
-                    value={body}
-                    onChange={setBody}
-                  />
+                  {
+                    postState.slugButton ? (
+                      <button className='btn btn-default' onClick={handleURL}>
+                        Update Slug
+                      </button>
+                    ) : ('')
+                  }
                 </div>
                 <div className='group'>
                   <label htmlFor='description'>Meta Description (Max 250 words)</label>
@@ -157,35 +155,32 @@ const CreatePost = () => {
                     {postState.description ? postState.description.length : 0}
                   </p>
                 </div>
-              </div>
-            </div>
-            <div className='col-6 p-15'>
-              <div className='card'>
                 <div className='group'>
-                  <label htmlFor='slug'>Post URL</label>
-                  <input
-                    className='group__control'
-                    placeholder='Post URL...'
-                    autoComplete='off'
-                    type='text'
-                    name="slug"
-                    onChange={handleChange}
-                    value={postState.slug}
+                  <label htmlFor='body'>Post body</label>
+                  <ReactQuill
+                    theme='snow'
+                    placeholder='Post body...'
+                    modules={modules}
+                    formats={formats}
+                    name="body"
+                    value={body}
+                    onChange={setBody}
                   />
-
                 </div>
                 <div className='group'>
-                  {
-                    postState.slugButton ? (
-                      <button className='btn btn-default' onClick={handleURL}>
-                        Update Slug
-                      </button>
-                    ) : ('')
-                  }
+                  <label htmlFor='image' className='image__label'>
+                    {postState.currentImage}
+                  </label>
+                  <input
+                    type='file'
+                    name='image'
+                    id='image'
+                    onChange={fileHandle}
+                  />
                 </div>
                 <div className='group'>
                   <div className='imagePreivew'>
-                    {postState.imagePreview ? <img src={postState.imagePreview} /> : ''}
+                    {postState.imagePreview ? <img src={postState.imagePreview} alt="image_preview" /> : ''}
                   </div>
                 </div>
 
