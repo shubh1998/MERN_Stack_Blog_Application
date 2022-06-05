@@ -3,11 +3,11 @@ import { getAuthToken } from 'utils/services/cookie.services'
 import PrivateRoutes from './HOC/PrivateRoutes/index'
 import PublicRoutes from './HOC/PublicRoutes/index'
 
-const RouteValidator = ({ hasAuth, hasNavBar, component: Component, ...props }) => {
+const RouteValidator = ({ hasAuth, hasNavBar, component: Component, path, ...props }) => {
   const isAuthenticated = getAuthToken()
   return hasAuth
     ? <PrivateRoutes Component={Component} isAuthenticated={isAuthenticated} hasNavBar={hasNavBar} />
-    : <PublicRoutes Component={Component} isAuthenticated={isAuthenticated} hasNavBar={hasNavBar} />
+    : <PublicRoutes Component={Component} isAuthenticated={isAuthenticated} hasNavBar={hasNavBar} path={path}/>
 }
 
 RouteValidator.propTypes = {

@@ -17,6 +17,14 @@ export const routeList = [
   },
   {
     key: 2,
+    label: 'Home',
+    path: ROUTE_PATHS.home,
+    component: Home,
+    hasAuth: true,
+    hasNavBar: true
+  },
+  {
+    key: 3,
     label: 'Login',
     path: ROUTE_PATHS.login,
     component: Login,
@@ -24,7 +32,7 @@ export const routeList = [
     hasNavBar: true
   },
   {
-    key: 3,
+    key: 4,
     label: 'Register',
     path: ROUTE_PATHS.register,
     component: Register,
@@ -32,7 +40,7 @@ export const routeList = [
     hasNavBar: true
   },
   {
-    key: 4,
+    key: 5,
     label: 'Dashboard',
     path: ROUTE_PATHS.dashboard,
     component: Dashboard,
@@ -40,7 +48,7 @@ export const routeList = [
     hasNavBar: true
   },
   {
-    key: 5,
+    key: 6,
     label: 'Create Post',
     path: ROUTE_PATHS.createPost,
     component: CreatePost,
@@ -48,7 +56,7 @@ export const routeList = [
     hasNavBar: true
   },
   {
-    key: 5,
+    key: 7,
     label: 'Update Post',
     path: ROUTE_PATHS.updatePost,
     component: CreatePost,
@@ -56,11 +64,19 @@ export const routeList = [
     hasNavBar: true
   },
   {
-    key: 6,
+    key: 8,
     label: 'View Blog',
     path: ROUTE_PATHS.viewBlog,
     component: ViewBlog,
     hasAuth: false,
+    hasNavBar: true
+  },
+  {
+    key: 9,
+    label: 'View Blog',
+    path: ROUTE_PATHS.viewBlog,
+    component: ViewBlog,
+    hasAuth: true,
     hasNavBar: true
   }
 ]

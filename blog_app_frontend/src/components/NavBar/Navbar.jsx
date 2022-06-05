@@ -15,6 +15,9 @@ const Navbar = () => {
 
   const Links = isAuthenticated ? (
     <div className='navbar__right'>
+       <li>
+        <Link to={ROUTE_PATHS.home}>Home</Link>
+      </li>
       <li>
         <Link to={ROUTE_PATHS.dashboard}>Dashboard</Link>
       </li>
