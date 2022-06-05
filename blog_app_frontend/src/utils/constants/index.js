@@ -6,7 +6,8 @@ export const ROUTE_PATHS = {
   login: '/login',
   register: '/register',
   createPost: '/create-post',
-  updatePost: '/update-post'
+  updatePost: '/update-post',
+  viewBlog: '/blog/:slug'
 }
 
 /* ==========================================================================

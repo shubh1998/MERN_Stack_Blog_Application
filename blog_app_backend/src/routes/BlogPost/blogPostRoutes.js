@@ -7,7 +7,7 @@ router.post('/blog-post/create', isAuthenticated, upload.single('image'), blogMa
 router.patch('/blog-post/update', isAuthenticated, upload.single('image'), blogManagementController.createBlogPost)
 router.get('/blog-post/all', isAuthenticated, blogManagementController.fetchAllPostsOfUser)
 router.delete('/blog-post/delete', isAuthenticated, blogManagementController.deletePostById)
-router.get('/blog-post/details', isAuthenticated, blogManagementController.fetchPostById)
+router.get('/blog-post/details', blogManagementController.fetchPostById)
 router.get('/all-blogs', blogManagementController.fetchAllPosts)
 
 module.exports = router

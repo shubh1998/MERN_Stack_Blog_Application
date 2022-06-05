@@ -23,10 +23,10 @@ export const updateBlogPostService = (data) => {
 }
 
 export const fetchBlogByIdService = (data) => {
-  const { blogId } = data
+  const { blogId, slug } = data
   return axiosInstance(METHOD_TYPES.get, '/blog-post/details', {}, {
     server: microServices.API_URL_1,
-    params: { blog_id: blogId },
+    params: { blog_id: blogId, slug: slug },
     loader: LOADER_HANDLER_TYPES.page,
   })
 }

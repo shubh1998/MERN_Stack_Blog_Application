@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import Pagination from 'components/Pagination/Pagination';
 import { fetchBlogsOnHome } from 'redux-thunk/thunk/Home/Home';
+import { ROUTE_PATHS } from 'utils/constants/index';
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -38,7 +39,7 @@ const Home = () => {
                 {
                   allPosts.result.length > 0 ? (
                     allPosts.result.map((post) => (
-                      <Link to={`/details/${post.slug}`} key={post._id}>
+                      <Link to={`${ROUTE_PATHS.viewBlog.split(':')[0]}${post.slug}`} key={post._id}>
                         <div className='row post-style' >
                           <div className='col-8'>
                             <div className='post'>

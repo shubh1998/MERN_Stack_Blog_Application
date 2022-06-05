@@ -84,7 +84,13 @@ const fetchAllPostsOfUser = async (req, res) => {
 const fetchPostById = async (req, res) => {
     try {
         const id = req.query.blog_id;
-        const getPostDetail = await BlogPost.findOne({ _id: id });
+        const slug = req.query.slug
+        let getPostDetail = {}
+        if(id){
+            getPostDetail = await BlogPost.findOne({ _id: id });
+        } else if(slug) {
+            getPostDetail = await BlogPost.findOne({ slug: slug });
+        } 
         return okResponse(res, { data: getPostDetail, message: "Post fetched successfully !" })
     } catch (error) {
         return internalServerError(res, { errors: [{ message: error.message }] })

@@ -1,6 +1,7 @@
 import Login from "pages/Auth/Login/Login";
 import Register from "pages/Auth/Register/Register";
 import CreatePost from "pages/BlogPost/CreatePost/CreatePost";
+import ViewBlog from "pages/BlogPost/ViewBlog/ViewBlog";
 import Dashboard from "pages/Dashboard/Dashboard";
 import Home from "pages/Home/Home";
 import { ROUTE_PATHS } from "utils/constants/index";
@@ -52,6 +53,14 @@ export const routeList = [
     path: ROUTE_PATHS.updatePost,
     component: CreatePost,
     hasAuth: true,
+    hasNavBar: true
+  },
+  {
+    key: 6,
+    label: 'View Blog',
+    path: ROUTE_PATHS.viewBlog,
+    component: ViewBlog,
+    hasAuth: false,
     hasNavBar: true
   }
 ]
