@@ -6,9 +6,6 @@
 .post-style {
     border-bottom: 1px solid #e5e7eb;
     padding: 2rem;
-    &:last-child {
-        border-bottom: none;
-    }
 }
 .post {
     &__header {
@@ -66,8 +63,8 @@
         }
     }
     &__image {
-        width: 100%;
-        height: 100%;
+        width: 200px;
+        height: 200px;
         img {
             width: 100%;
             height: 100%;

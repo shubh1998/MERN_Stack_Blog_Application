@@ -59,6 +59,7 @@ const CreatePost = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     const { title, description, slug, image } = postState
+    console.log(postState)
     const formData = new FormData();
     formData.append('title', title);
     formData.append('image', image);
@@ -131,7 +132,9 @@ const CreatePost = () => {
         title: updatePostData.title,
         description: updatePostData.description,
         slug: updatePostData.slug,
-        image: new File([updatePostData.image],  '/blog-post-images/' + updatePostData.image),
+        image: new File([updatePostData.image],  '/blog-post-images/' + updatePostData.image, {
+          type: "image/" + updatePostData.image.split(".")[1]
+        }),
 
         // new File('/blog-post-images/' + updatePostData.image),
         imagePreview: '/blog-post-images/' + updatePostData.image,

@@ -21,6 +21,7 @@ export const createBlogPost = createAsyncThunk('blog/create', async (data, thunk
 export const updateBlogPost = createAsyncThunk('blog/update', async (data, thunkApi) => {
   try {
     const { navigate, formData, blogId } = data
+    console.log(formData)
     const res = await updateBlogPostService({
       blogId,
       formData

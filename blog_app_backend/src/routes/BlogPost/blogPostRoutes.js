@@ -8,5 +8,6 @@ router.patch('/blog-post/update', isAuthenticated, upload.single('image'), blogM
 router.get('/blog-post/all', isAuthenticated, blogManagementController.fetchAllPostsOfUser)
 router.delete('/blog-post/delete', isAuthenticated, blogManagementController.deletePostById)
 router.get('/blog-post/details', isAuthenticated, blogManagementController.fetchPostById)
+router.get('/all-blogs', blogManagementController.fetchAllPosts)
 
 module.exports = router

@@ -63,8 +63,8 @@ const Dashboard = () => {
                   </div>
                 </div>
               )
-              ) :
-              <h1>No Posts Found</h1>
+            ) :
+            <h1>No Posts Found</h1>
           }
           {
             dashboardPostsData.total_documents ?

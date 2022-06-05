@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchBlogsOnHome } from 'redux-thunk/thunk/Home/Home'
 const defaultHomeState = {
-  allPosts: []
+  allPosts: null
 }
 
 const homeSlice = createSlice({
