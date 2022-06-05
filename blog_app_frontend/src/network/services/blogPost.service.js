@@ -28,6 +28,5 @@ export const fetchBlogByIdService = (data) => {
     server: microServices.API_URL_1,
     params: { blog_id: blogId },
     loader: LOADER_HANDLER_TYPES.page,
-    showApiSuccessMessage: true
   })
 }

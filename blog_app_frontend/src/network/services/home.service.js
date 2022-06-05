@@ -7,6 +7,5 @@ export const fetchAllBlogsForHome = (data) => {
     server: microServices.API_URL_1,
     params: { page, limit },
     loader: LOADER_HANDLER_TYPES.page,
-    showApiSuccessMessage: true
   })
 }

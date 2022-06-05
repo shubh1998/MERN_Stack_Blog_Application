@@ -6,8 +6,7 @@ export const fetchAllBlogsForDashboardService = (data) => {
   return axiosInstance(METHOD_TYPES.get, '/blog-post/all', {}, {
     server: microServices.API_URL_1,
     params: { page, limit },
-    loader: LOADER_HANDLER_TYPES.page,
-    showApiSuccessMessage: true
+    loader: LOADER_HANDLER_TYPES.page
   })
 }
 
