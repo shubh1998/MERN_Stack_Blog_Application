@@ -25,6 +25,9 @@ const Navbar = () => {
         <Link to={ROUTE_PATHS.createPost}>Create Post</Link>
       </li>
       <li>
+        <Link to={ROUTE_PATHS.profile}>Profile</Link>
+      </li>
+      <li>
         <span onClick={handleLogout}>Logout</span>
       </li>
     </div>

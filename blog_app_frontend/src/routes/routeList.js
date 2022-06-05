@@ -1,4 +1,5 @@
 import Login from "pages/Auth/Login/Login";
+import Profile from "pages/Auth/Profile/Profile";
 import Register from "pages/Auth/Register/Register";
 import CreatePost from "pages/BlogPost/CreatePost/CreatePost";
 import ViewBlog from "pages/BlogPost/ViewBlog/ViewBlog";
@@ -76,6 +77,14 @@ export const routeList = [
     label: 'View Blog',
     path: ROUTE_PATHS.viewBlog,
     component: ViewBlog,
+    hasAuth: true,
+    hasNavBar: true
+  },
+  {
+    key: 9,
+    label: 'Profile',
+    path: `${ROUTE_PATHS.profile}/*`,
+    component: Profile,
     hasAuth: true,
     hasNavBar: true
   }

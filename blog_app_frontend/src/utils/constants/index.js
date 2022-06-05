@@ -7,7 +7,9 @@ export const ROUTE_PATHS = {
   register: '/register',
   createPost: '/create-post',
   updatePost: '/update-post',
-  viewBlog: '/blog/:slug'
+  viewBlog: '/blog/:slug',
+  profile: '/profile',
+  changePassword: '/change-password',
 }
 
 /* ==========================================================================

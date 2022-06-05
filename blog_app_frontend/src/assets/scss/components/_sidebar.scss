@@ -14,7 +14,7 @@
         border: 1px solid $silverLight;
         border-top: none;
         cursor: pointer;
-        a {
+        span {
             color: $black;
             font-size: 1.4rem;
         }
@@ -25,11 +25,26 @@
         &:hover {
             background: $green;
         }
-        &:hover a {
+        &:hover span {
             color: $white;
         }
         &:hover h3 {
             color: $white;
         }
+    }
+    &__active_element {
+      background: $green;
+      padding: 1.5rem;
+      border: 1px solid $silverLight;
+      border-top: none;
+      cursor: pointer;
+      span {
+        color: $white;
+        font-size: 1.4rem;
+      }
+      h3 {
+          font-size: 1.8rem;
+          font-weight: 400;
+      }
     }
 }
