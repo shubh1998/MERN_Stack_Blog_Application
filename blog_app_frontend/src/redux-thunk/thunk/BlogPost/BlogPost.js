@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { createBlogPostService, fetchBlogByIdService, updateBlogPostService } from 'network/services/blogPost.service'
+import { addCommentService, createBlogPostService, fetchBlogByIdService, updateBlogPostService } from 'network/services/blogPost.service'
 import { ROUTE_PATHS } from 'utils/constants/index'
 
 export const createBlogPost = createAsyncThunk('blog/create', async (data, thunkApi) => {
@@ -40,6 +40,16 @@ export const updateBlogPost = createAsyncThunk('blog/update', async (data, thunk
 export const getBlogByIdOnDashboard = createAsyncThunk('blog/details', async (data, thunkApi) => {
   try {
     const res = await fetchBlogByIdService(data)
+    return res
+  } catch (error) {
+    return thunkApi.rejectWithValue(error[0].message)
+  }
+})
+
+
+export const postComment = createAsyncThunk('post/comment', async (data, thunkApi) => {
+  try {
+    const res = await addCommentService(data)
     return res
   } catch (error) {
     return thunkApi.rejectWithValue(error[0].message)

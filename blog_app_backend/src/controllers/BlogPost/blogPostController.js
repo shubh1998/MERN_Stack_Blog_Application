@@ -1,4 +1,5 @@
 const BlogPost = require("../../models/BlogPost");
+const Comment = require("../../models/Comment");
 
 const createBlogPost = async (req, res) => {
     const blog_id = req.query.blog_id
@@ -86,11 +87,18 @@ const fetchPostById = async (req, res) => {
         const id = req.query.blog_id;
         const slug = req.query.slug
         let getPostDetail = {}
-        if(id){
+        if(id && slug) {
+            const comments = await Comment.find({ postId: id }).sort({
+                updatedAt: -1,
+            });
+            const postDetail = await BlogPost.findOne({ slug: slug,  _id: id });
+            getPostDetail = {
+                postDetail,
+                comments
+            }
+        } else if(id){
             getPostDetail = await BlogPost.findOne({ _id: id });
-        } else if(slug) {
-            getPostDetail = await BlogPost.findOne({ slug: slug });
-        } 
+        }
         return okResponse(res, { data: getPostDetail, message: "Post fetched successfully !" })
     } catch (error) {
         return internalServerError(res, { errors: [{ message: error.message }] })
@@ -128,10 +136,27 @@ const fetchAllPosts = async (req, res) => {
     }
 }
 
+const AddCommentOnBlogPost = async (req, res) => {
+	const { id, comment} = req.body;
+
+	try {
+		const response = await Comment.create({
+			postId: id,
+			comment,
+			userName: req.user.name,
+		});
+
+        return okResponse(res, { data: response, message: "Your comment has been published !" })
+	} catch (error) {
+		return internalServerError(res, { errors: [{ message: error.message }] })
+	}
+};
+
 module.exports = {
     createBlogPost,
     fetchAllPostsOfUser,
     fetchPostById,
     deletePostById,
-    fetchAllPosts
+    fetchAllPosts,
+    AddCommentOnBlogPost
 }

@@ -30,3 +30,11 @@ export const fetchBlogByIdService = (data) => {
     loader: LOADER_HANDLER_TYPES.page,
   })
 }
+
+export const addCommentService = (data) => {
+  return axiosInstance(METHOD_TYPES.post, '/blog-post/add-comment', data, {
+    server: microServices.API_URL_1,
+    params: { },
+    loader: LOADER_HANDLER_TYPES.page,
+  })
+}

@@ -9,5 +9,6 @@ router.get('/blog-post/all', isAuthenticated, blogManagementController.fetchAllP
 router.delete('/blog-post/delete', isAuthenticated, blogManagementController.deletePostById)
 router.get('/blog-post/details', blogManagementController.fetchPostById)
 router.get('/all-blogs', blogManagementController.fetchAllPosts)
+router.post('/blog-post/add-comment', isAuthenticated, blogManagementController.AddCommentOnBlogPost)
 
 module.exports = router

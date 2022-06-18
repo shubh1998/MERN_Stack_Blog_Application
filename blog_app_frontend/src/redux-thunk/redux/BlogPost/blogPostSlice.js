@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { createBlogPost, getBlogByIdOnDashboard, updateBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost'
+import { createBlogPost, getBlogByIdOnDashboard, postComment, updateBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost'
 const defaultBlogPostState = {
-  updatePostData: null
+  updatePostData: null,
+  comments: []
 }
 
 const blogPostSlice = createSlice({
@@ -24,7 +25,17 @@ const blogPostSlice = createSlice({
       })
       .addCase(getBlogByIdOnDashboard.fulfilled, (state, action) => {
         return {
-          updatePostData: action.payload
+          updatePostData: action.payload?.postDetail || action.payload,
+          comments: action.payload?.comments || []
+        }
+      })
+      .addCase(postComment.fulfilled, (state, action) => {
+        return {
+            ...state,
+            comments: [
+              action.payload,
+              ...state.comments,
+            ]
         }
       })
   }

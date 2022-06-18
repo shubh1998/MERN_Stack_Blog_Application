@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import Pagination from 'components/Pagination/Pagination';
 import { fetchBlogsOnHome } from 'redux-thunk/thunk/Home/Home';
@@ -29,17 +29,25 @@ const Home = () => {
     // eslint-disable-next-line
   }, [])
 
+  const redirectOnViewBlog = (post) => {
+    navigate(`${ROUTE_PATHS.viewBlog.split(':')[0]}${post.slug}`, {
+      state: {
+        postId: post._id
+      }
+    })
+  }
+
   return (
     <>
       {
         allPosts && (
           <div className='row' style={{ marginBottom: '30px', marginTop: '20px' }}>
-              <div className='container'>
+            <div className='container'>
               <div className='col-12 home'>
                 {
                   allPosts.result.length > 0 ? (
                     allPosts.result.map((post) => (
-                      <Link to={`${ROUTE_PATHS.viewBlog.split(':')[0]}${post.slug}`} key={post._id}>
+                      <div onClick={() => redirectOnViewBlog(post)} key={post._id} style={{ cursor: 'pointer' }}>
                         <div className='row post-style' >
                           <div className='col-8'>
                             <div className='post'>
@@ -62,21 +70,21 @@ const Home = () => {
                                 </h1>
                                 <div className='post__body__details'>
                                   {
-                                  post.body.replace(/<[^>]*>/g, '').length > 315
-                                  ? post.body.replace(/<[^>]*>/g, '').slice(0, 315) + '...'
-                                  : post.body.replace(/<[^>]*>/g, '')
+                                    post.body.replace(/<[^>]*>/g, '').length > 315
+                                      ? post.body.replace(/<[^>]*>/g, '').slice(0, 315) + '...'
+                                      : post.body.replace(/<[^>]*>/g, '')
                                   }
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div className='col-4' style={{display: 'flex', justifyContent: 'center'}}>
+                          <div className='col-4' style={{ display: 'flex', justifyContent: 'center' }}>
                             <div className='post__image'>
                               <img src={`/blog-post-images/${post.image}`} alt={post.image} />
                             </div>
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     ))
                   ) : (
                     <h1>No Posts Found</h1>
