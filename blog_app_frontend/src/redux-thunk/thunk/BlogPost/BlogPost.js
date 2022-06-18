@@ -4,13 +4,8 @@ import { ROUTE_PATHS } from 'utils/constants/index'
 
 export const createBlogPost = createAsyncThunk('blog/create', async (data, thunkApi) => {
   try {
-    const { navigate, formData } = data
+    const { formData } = data
     const res = await createBlogPostService(formData)
-    if (res) {
-      navigate(ROUTE_PATHS.dashboard, {
-        replace: true
-      })
-    }
     return res
   } catch (error) {
     return thunkApi.rejectWithValue(error[0].message)
@@ -20,17 +15,11 @@ export const createBlogPost = createAsyncThunk('blog/create', async (data, thunk
 
 export const updateBlogPost = createAsyncThunk('blog/update', async (data, thunkApi) => {
   try {
-    const { navigate, formData, blogId } = data
-    console.log(formData)
+    const { formData, blogId } = data
     const res = await updateBlogPostService({
       blogId,
       formData
     })
-    if (res) {
-      navigate(ROUTE_PATHS.dashboard, {
-        replace: true
-      })
-    }
     return res
   } catch (error) {
     return thunkApi.rejectWithValue(error[0].message)

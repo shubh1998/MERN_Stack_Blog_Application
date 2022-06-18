@@ -3,7 +3,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AppLoader from 'components/AppLoader/AppLoader'
 import { useDispatch, useSelector } from 'react-redux';
-import { LOADER_TYPE } from 'utils/constants/index';
+import { LOADER_TYPE, ROUTE_PATHS } from 'utils/constants/index';
 import { useEffect, useReducer, useState } from 'react';
 import { createBlogPost, getBlogByIdOnDashboard, updateBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost';
 import { resetUpdatePostData } from 'redux-thunk/redux/BlogPost/blogPostSlice';
@@ -44,10 +44,8 @@ const initialStates = {
 const CreatePost = () => {
   const { state } = useLocation()
   const blogIdForUpdate = state?._id || null
-  console.log(blogIdForUpdate)
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const [body, setBody] = useState('')
   const [postState, setPostState] = useReducer((state, newState) => ({
     ...state,
@@ -59,25 +57,26 @@ const CreatePost = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     const { title, description, slug, image } = postState
-    console.log(postState)
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('image', image);
+    if (image) {
+      formData.append('image', image);
+    }
     formData.append('description', description);
     formData.append('slug', slug);
     formData.append('body', body);
-    if(blogIdForUpdate && updatePostData){
+    if (blogIdForUpdate && updatePostData) {
       dispatch(updateBlogPost({
         formData,
-        navigate,
         blogId: blogIdForUpdate
       }))
-    } else{
+    } else {
       dispatch(createBlogPost({
-        formData,
-        navigate
+        formData
       }))
     }
+    setPostState(initialStates)
+    setBody('')
   }
 
   const fileHandle = (e) => {
@@ -119,7 +118,7 @@ const CreatePost = () => {
         blogId: blogIdForUpdate
       }))
     }
-    return ()=>{
+    return () => {
       dispatch(resetUpdatePostData())
     }
     // eslint-disable-next-line
@@ -127,20 +126,14 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (updatePostData) {
-      console.log(updatePostData)
       setPostState({
         title: updatePostData.title,
         description: updatePostData.description,
         slug: updatePostData.slug,
-        image: new File([updatePostData.image],  '/blog-post-images/' + updatePostData.image, {
-          type: "image/" + updatePostData.image.split(".")[1]
-        }),
-
-        // new File('/blog-post-images/' + updatePostData.image),
         imagePreview: '/blog-post-images/' + updatePostData.image,
-        currentImage: 'updatePostData.image',
-       })
-       setBody(updatePostData.body)
+        currentImage: updatePostData.image,
+      })
+      setBody(updatePostData.body)
     }
   }, [updatePostData])
 
