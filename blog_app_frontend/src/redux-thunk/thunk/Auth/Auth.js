@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { loginService, logoutService, registerService } from 'network/services/auth.service'
+import { changePasswordService, loginService, logoutService, registerService } from 'network/services/auth.service'
 import { ROUTE_PATHS } from 'utils/constants/index'
 import { signOut } from 'utils/services/cookie.services'
 
@@ -37,3 +37,11 @@ export const userLogout = createAsyncThunk('user/logout', async ({ navigate }, t
   }
 })
 
+export const userChangePassword = createAsyncThunk('user/change/password', async (data, thunkApi) => {
+  try {
+    const res = await changePasswordService(data)
+    return res
+  } catch (error) {
+    return thunkApi.rejectWithValue(error[0].message)
+  }
+})

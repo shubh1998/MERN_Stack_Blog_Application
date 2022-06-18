@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt")
 const User = require("../../models/User");
 
 const registerUser = async (req, res) => {
@@ -60,7 +61,34 @@ const loginUser = async (req, res) => {
     }
 }
 
+const changePassword = async (req, res) => {
+    try {
+        const { oldPassword, newPassword, confirmPassword } = req.body;
+
+        if (newPassword !== confirmPassword) {
+            return badRequestError(res, { errors: [{ message: "New password should be same as confirm password !" }] })
+        }
+
+        const user = await User.findOne({ _id: req.user._id });
+
+        if (user) {
+            const isMatchPassword = await user.authenticate(oldPassword)
+            if (!isMatchPassword) {
+                return badRequestError(res, { errors: [{ message: "Old password is wrong !" }] })
+            }
+
+            const hashedPassword = await bcrypt.hash(confirmPassword, 10)
+            const response = await User.findOneAndUpdate({ _id: req.user._id }, { password: hashedPassword });
+
+            return okResponse(res, { data: response, message: "Your password has been updated !" });
+        }
+    } catch (error) {
+        return internalServerError(res, { errors: [{ message: error.message }] })
+    }
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    changePassword
 }

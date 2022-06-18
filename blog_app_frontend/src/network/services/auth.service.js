@@ -10,7 +10,6 @@ export const registerService = (data) => {
   })
 }
 
-
 export const loginService = (data) => {
   return axiosInstance(METHOD_TYPES.post, '/user/login', data, {
     server: microServices.API_URL_1,
@@ -25,5 +24,13 @@ export const logoutService = () => {
     server: microServices.ADMIN_URL,
     loader: LOADER_HANDLER_TYPES.page,
     successMessage: 'Logout Successfully'
+  })
+}
+
+export const changePasswordService = (data) => {
+  return axiosInstance(METHOD_TYPES.patch, '/user/change-password', data, {
+    server: microServices.API_URL_1,
+    loader: LOADER_HANDLER_TYPES.submit,
+    showApiSuccessMessage: true
   })
 }

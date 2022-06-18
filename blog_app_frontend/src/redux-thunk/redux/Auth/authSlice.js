@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { userLogin, userLogout, userRegister } from 'redux-thunk/thunk/Auth/Auth'
+import { userChangePassword, userLogin, userLogout, userRegister } from 'redux-thunk/thunk/Auth/Auth'
 const defaultAuthState = {}
 
 const authSlice = createSlice({
@@ -19,6 +19,11 @@ const authSlice = createSlice({
         }
       })
       .addCase(userRegister.fulfilled, (state, action) => {
+        return {
+          ...defaultAuthState
+        }
+      })
+      .addCase(userChangePassword.fulfilled, (state, action) => {
         return {
           ...defaultAuthState
         }
