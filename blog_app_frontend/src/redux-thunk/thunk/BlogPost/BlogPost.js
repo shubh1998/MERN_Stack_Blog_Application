@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { addCommentService, createBlogPostService, fetchBlogByIdService, updateBlogPostService } from 'network/services/blogPost.service'
-import { ROUTE_PATHS } from 'utils/constants/index'
 
 export const createBlogPost = createAsyncThunk('blog/create', async (data, thunkApi) => {
   try {

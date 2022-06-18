@@ -34,7 +34,7 @@ const Login = () => {
 
   return (
     <>
-      <div className='row mt-80'>
+      <div className='row'>
         <div className='col-8'>
           <BgImage />
         </div>

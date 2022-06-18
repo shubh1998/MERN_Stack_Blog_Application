@@ -52,7 +52,8 @@ const ViewBlog = () => {
         blogId
       }));
     }
-  }, [slug]);
+    // eslint-disable-next-line
+  }, [slug, blogId]);
 
 
   return (

@@ -7,7 +7,7 @@ const Pagination = ({ total, page, limit, handlePagination }) => {
   const pageNumbers = () => {
     for (let pageValue = 1; pageValue <= totalPages; pageValue++) {
       paginationLinks.push(
-        <li key={pageValue} className={pageValue == page ? 'active' : ''} onClick={() => handlePagination({ page: pageValue })} >
+        <li key={pageValue} className={pageValue === page ? 'active' : ''} onClick={() => handlePagination({ page: pageValue })} >
           <Link to=''>{pageValue}</Link>
         </li>
       );

@@ -1,9 +1,9 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import AppLoader from 'components/AppLoader/AppLoader'
 import { useDispatch, useSelector } from 'react-redux';
-import { LOADER_TYPE, ROUTE_PATHS } from 'utils/constants/index';
+import { LOADER_TYPE } from 'utils/constants/index';
 import { useEffect, useReducer, useState } from 'react';
 import { createBlogPost, getBlogByIdOnDashboard, updateBlogPost } from 'redux-thunk/thunk/BlogPost/BlogPost';
 import { resetUpdatePostData } from 'redux-thunk/redux/BlogPost/blogPostSlice';

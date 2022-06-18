@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { BsPencil, BsEyeFill } from 'react-icons/bs';
-import { fetchProfileDetails, updateProfileDetails, userLogin } from 'redux-thunk/thunk/Auth/Auth';
+import { fetchProfileDetails, updateProfileDetails } from 'redux-thunk/thunk/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import AppLoader from 'components/AppLoader/AppLoader';
 import { LOADER_TYPE } from 'utils/constants/index';
@@ -28,7 +28,6 @@ const UpdateProfile = () => {
   const { submitButtonLoader } = useSelector((state) => state.loader)
   const { profile } = useSelector(state => state.auth)
   const dispatch = useDispatch()
-  // const navigate = useNavigate()
   const [editDisable, setEditDisable] = useState(true)
 
   const onUpdateProfileFormSubmit = (values) => {
@@ -43,6 +42,7 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     dispatch(fetchProfileDetails())
+    // eslint-disable-next-line
   }, [])
 
   return (
