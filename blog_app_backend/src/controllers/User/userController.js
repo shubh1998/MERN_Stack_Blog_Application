@@ -87,8 +87,39 @@ const changePassword = async (req, res) => {
     }
 }
 
+const getProfileDetails = async (req, res) => {
+    try {
+        const user = await User.findById({ _id: req.user._id })
+        const returnData = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        }
+
+        return okResponse(res, { data: returnData, message: "Profile details fetched successfully !" });
+    } catch (error) {
+        return internalServerError(res, { errors: [{ message: error.message }] })
+    }
+}
+
+const updateProfile = async (req, res) => {
+    try {
+        const { name, email } = req.body
+
+        const response = await User.findOneAndUpdate({ _id: req.user._id }, { name, email }, { new: true });
+
+        return okResponse(res, { data: response, message: "Profile details updated successfully !" });
+    } catch (error) {
+        return internalServerError(res, { errors: [{ message: error.message }] })
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
-    changePassword
+    changePassword,
+    getProfileDetails,
+    updateProfile
 }

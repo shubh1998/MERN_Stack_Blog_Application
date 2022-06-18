@@ -34,3 +34,19 @@ export const changePasswordService = (data) => {
     showApiSuccessMessage: true
   })
 }
+
+export const fetchProfileDetailsService = () => {
+  return axiosInstance(METHOD_TYPES.get, '/user/profile', {}, {
+    server: microServices.API_URL_1,
+    loader: LOADER_HANDLER_TYPES.page,
+    showApiSuccessMessage: false
+  })
+}
+
+export const updateProfileDetailsService = (data) => {
+  return axiosInstance(METHOD_TYPES.patch, '/user/profile', data, {
+    server: microServices.API_URL_1,
+    loader: LOADER_HANDLER_TYPES.page,
+    showApiSuccessMessage: true
+  })
+}

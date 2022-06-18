@@ -1,8 +1,6 @@
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import BgImage from '../BgImage/BgImage';
-import { useNavigate } from 'react-router-dom';
-import { userChangePassword, userLogin } from 'redux-thunk/thunk/Auth/Auth';
+import { userChangePassword } from 'redux-thunk/thunk/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import AppLoader from 'components/AppLoader/AppLoader';
 import { LOADER_TYPE } from 'utils/constants/index';
@@ -35,7 +33,7 @@ const ChangePassword = () => {
   const { submitButtonLoader } = useSelector((state) => state.loader)
   const dispatch = useDispatch()
 
-  const onLoginFormSubmit = (values) => {
+  const onChangePasswordFormSubmit = (values) => {
     const { oldPassword, newPassword, confirmPassword } = values
     dispatch(userChangePassword({
       oldPassword, newPassword, confirmPassword
@@ -56,7 +54,7 @@ const ChangePassword = () => {
               initialValues={formInitialValues}
               validationSchema={loginSchema}
               onSubmit={(values, { resetForm }) => {
-                onLoginFormSubmit(values)
+                onChangePasswordFormSubmit(values)
                 resetForm()
               }}
             >
@@ -116,7 +114,7 @@ const ChangePassword = () => {
                         {
                           submitButtonLoader ?
                             <AppLoader variant={LOADER_TYPE.PULSE} size={5} /> :
-                            'Login'
+                            'Change Password'
                         }
                       </button>
                     </div>
